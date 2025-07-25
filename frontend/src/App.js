@@ -6,6 +6,9 @@ function App() {
   const [author, setAuthor] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Use this base URL, update it as needed
+  const API_BASE_URL = "http://127.0.0.1:54197";
+
   // Fetch books on component mount
   useEffect(() => {
     fetchBooks();
@@ -13,7 +16,7 @@ function App() {
 
   const fetchBooks = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/books');
+      const res = await fetch(`${API_BASE_URL}/api/books`);
       const data = await res.json();
       setBooks(data);
     } catch (error) {
@@ -28,7 +31,7 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/api/books', {
+      const res = await fetch(`${API_BASE_URL}/api/books`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, author }),
